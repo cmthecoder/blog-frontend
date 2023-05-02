@@ -1,26 +1,26 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { formatISO9075 } from "date-fns";
 
-const Post = () => {
+const Post = ({ _id, title, summary, cover, content, createdAt, author }) => {
   return (
     <div className="post">
-        <div className="image">
-          <img src="https://i.imgur.com/LbBXK7C.jpg" alt="steak" />
-        </div>
-        <div className="text">
-          <h2>Steak and fries</h2>
-          <p className="info">
-            <Link className="author">Chris M</Link>
-            <time>2023-04-28 13:12</time>
-          </p>
-          <p className="summary">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut non
-            accusamus officiis voluptates itaque illo minus veniam, pariatur
-            aliquid reiciendis eaque laboriosam inventore rerum quia quasi quas
-            ad explicabo at.
-          </p>
-        </div>
+      <div className="image">
+        <Link to={`post/${_id}`}>
+          <img src={"http://localhost:4000/" + cover} alt="" />
+        </Link>
       </div>
-  )
-}
+      <div className="text">
+        <Link to={`post/${_id}`}>
+          <h2>{title}</h2>
+        </Link>
+        <p className="info">
+          <Link className="author">{author.username}</Link>
+          <time>{formatISO9075(new Date(createdAt))}</time>
+        </p>
+        <p className="summary">{summary}</p>
+      </div>
+    </div>
+  );
+};
 
-export default Post
+export default Post;
